@@ -1,12 +1,11 @@
-import React from 'react-native';
-const {
+import React, {
   PixelRatio,
   StatusBarIOS,
   Component,
   Text,
   View,
-  PropTypes
-} = React;
+  PropTypes,
+} from 'react-native';
 import NavbarButton from './NavbarButton';
 import styles from './styles';
 
@@ -26,27 +25,30 @@ const StatusBarShape = {
   hidden: PropTypes.bool,
   tintColor: PropTypes.string,
   hideAnimation: PropTypes.oneOf(['fade', 'slide', 'none', ]),
-  showAnimation: PropTypes.oneOf(['fade', 'slide', 'none', ])
+  showAnimation: PropTypes.oneOf(['fade', 'slide', 'none', ]),
 };
 
-function customizeStatusBar(data) {
-  if (data.style) {
-    StatusBarIOS.setStyle(data.style, true);
-  }
-  const animation = data.hidden ?
-    (data.hideAnimation || NavigationBar.defaultProps.statusBar.hideAnimation) :
-    (data.showAnimation || NavigationBar.defaultProps.statusBar.showAnimation);
-
-  StatusBarIOS.setHidden(data.hidden, animation);
-}
-
 export default class NavigationBar extends Component {
+  customizeStatusBar(data) {
+    if (data.style) {
+      StatusBarIOS.setStyle(data.style, true);
+    }
+
+    const animation = data.hidden ? data.hideAnimation : data.showAnimation;
+
+    StatusBarIOS.setHidden(data.hidden, animation);
+  }
+
   componentDidMount() {
-    customizeStatusBar(this.props.statusBar);
+    if (this.props.statusBar) {
+      this.customizeStatusBar(this.props.statusBar);
+    }
   }
 
   componentWillReceiveProps(props) {
-    customizeStatusBar(this.props.statusBar);
+    if (this.props.statusBar) {
+      this.customizeStatusBar(this.props.statusBar);
+    }
   }
 
   getButtonElement(data = {}, style) {
@@ -61,7 +63,7 @@ export default class NavigationBar extends Component {
       handler={data.handler} />;
   }
 
-  getTitleElement(data) {
+  getTitleElement(data = {}) {
     if (data._isReactElement) {
       return <View style={styles.customTitle}>{data}</View>;
     }
@@ -78,7 +80,7 @@ export default class NavigationBar extends Component {
 
   render() {
     const customTintColor = this.props.tintColor ?
-      { backgroundColor: this.props.tintColor } : null;
+      { backgroundColor: this.props.tintColor, } : null;
 
     const statusBar = !this.props.statusBar.hidden ?
       <View style={[styles.statusBar, ]} /> : null;
@@ -114,17 +116,5 @@ export default class NavigationBar extends Component {
       PropTypes.shape(TitleShape),
       PropTypes.element,
     ]),
-  }
-
-  static defaultProps = {
-    statusBar: {
-      style: 'default',
-      hidden: false,
-      hideAnimation: 'slide',
-      showAnimation: 'slide',
-    },
-    title: {
-      title: '',
-    },
   }
 }
