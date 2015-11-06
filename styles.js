@@ -1,22 +1,8 @@
-const NAV_BAR_HEIGHT = 39;
-const STATUS_BAR_HEIGHT = 20;
-const NAV_HEIGHT = NAV_BAR_HEIGHT + STATUS_BAR_HEIGHT;
+export const NAV_BAR_HEIGHT = 39;
+export const STATUS_BAR_HEIGHT = 20;
+export const NAV_HEIGHT = NAV_BAR_HEIGHT + STATUS_BAR_HEIGHT;
 
-module.exports = {
-  navBarContainer: {
-    backgroundColor: 'white',
-    paddingBottom: 5,
-    borderBottomColor: 'rgba(0, 0, 0, .5)',
-    borderBottomWidth: .5,
-  },
-  statusBar: {
-    height: STATUS_BAR_HEIGHT,
-  },
-  navBar: {
-    height: NAV_BAR_HEIGHT,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+export default {
   customTitle: {
     position: 'absolute',
     left: 0,

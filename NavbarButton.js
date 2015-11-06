@@ -10,7 +10,7 @@ import styles from './styles';
 
 export default class NavbarButton extends Component {
   render() {
-    const { style, tintColor, margin, title, handler } = this.props;
+    const { style, tintColor, title, handler, } = this.props;
 
     return (
       <TouchableOpacity onPress={handler}>

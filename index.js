@@ -1,5 +1,4 @@
 import React, {
-  PixelRatio,
   StatusBarIOS,
   Component,
   Text,
@@ -7,6 +6,9 @@ import React, {
   PropTypes,
 } from 'react-native';
 import NavbarButton from './NavbarButton';
+import NavbarContainer from './NavbarContainer';
+import NavbarContent from './NavbarContent';
+import NavbarStatusBar from './NavbarStatusBar';
 import styles from './styles';
 
 const ButtonShape = {
@@ -29,71 +31,34 @@ const StatusBarShape = {
 };
 
 export default class NavigationBar extends Component {
-  customizeStatusBar(data) {
-    if (data.style) {
-      StatusBarIOS.setStyle(data.style, true);
-    }
-
-    const animation = data.hidden ? data.hideAnimation : data.showAnimation;
-
-    StatusBarIOS.setHidden(data.hidden, animation);
-  }
-
-  componentDidMount() {
-    if (this.props.statusBar) {
-      this.customizeStatusBar(this.props.statusBar);
-    }
-  }
-
-  componentWillReceiveProps(props) {
-    if (this.props.statusBar) {
-      this.customizeStatusBar(this.props.statusBar);
-    }
-  }
-
-  getButtonElement(data = {}, style) {
-    if (data._isReactElement) {
-      return <View style={styles.navBarButton}>{data}</View>;
-    }
-
-    return <NavbarButton
-      title={data.title}
-      style={[data.style, style, ]}
-      tintColor={data.tintColor}
-      handler={data.handler} />;
-  }
-
-  getTitleElement(data = {}) {
-    if (data._isReactElement) {
-      return <View style={styles.customTitle}>{data}</View>;
-    }
-
-    const colorStyle = data.tintColor ? { color: data.tintColor, } : null;
-
-    return (
-      <Text
-        style={[styles.navBarTitleText, colorStyle, ]}>
-        {data.title}
-      </Text>
-    );
-  }
-
   render() {
     const customTintColor = this.props.tintColor ?
       { backgroundColor: this.props.tintColor, } : null;
 
-    const statusBar = !this.props.statusBar.hidden ?
-      <View style={[styles.statusBar, ]} /> : null;
+    const navbarTitleStyle = [
+      styles.navBarTitleText,
+      { color: this.props.title.tintColor, },
+    ];
+
+    const leftButtonStyle = [
+      { marginLeft: 8, },
+      this.props.leftButton.style,
+    ];
+
+    const rightButtonStyle = [
+      { marginRight: 8, },
+      this.props.leftButton.style,
+    ];
 
     return (
-      <View style={[styles.navBarContainer, customTintColor, ]}>
-        {statusBar}
-        <View style={[styles.navBar, this.props.style, ]}>
-          {this.getTitleElement(this.props.title)}
-          {this.getButtonElement(this.props.leftButton, { marginLeft: 8, })}
-          {this.getButtonElement(this.props.rightButton, { marginRight: 8, })}
-        </View>
-      </View>
+      <NavbarContainer style={customTintColor}>
+        <NavbarStatusBar {...this.props.statusBar}/>
+        <NavbarContent>
+          <Text style={navbarTitleStyle}>{this.props.title.title}</Text>
+          <NavbarButton {...this.props.leftButton} style={leftButtonStyle} />
+          <NavbarButton {...this.props.rightButton} style={rightButtonStyle} />
+        </NavbarContent>
+      </NavbarContainer>
     );
   }
 
