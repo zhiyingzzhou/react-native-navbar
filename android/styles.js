@@ -10,15 +10,12 @@ export default {
     bottom: 7,
     alignItems: 'center',
   },
-  navBarButton: {
-    marginTop: 12,
-  },
-  navBarButtonText: {
+  buttonText: {
     fontSize: 17,
     letterSpacing: 0.5,
-    marginTop: 12,
+    margin: 16,
   },
-  navBarTitleText: {
+  title: {
     fontSize: 17,
     letterSpacing: 0.5,
     color: '#333',
@@ -26,7 +23,7 @@ export default {
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 7,
+    bottom: 20,
     textAlign: 'center',
   },
   container: {

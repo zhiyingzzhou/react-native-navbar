@@ -39,7 +39,7 @@ export default class NavigationBar extends Component {
     };
 
     const navbarTitleStyle = [
-      styles.navBarTitleText,
+      styles.title,
       this.props.title.tintColor ?
         { color: this.props.title.tintColor, } : null,
     ];
