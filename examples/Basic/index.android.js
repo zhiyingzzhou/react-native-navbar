@@ -5,7 +5,7 @@ const {
   Text,
   View,
 } = React;
-import NavigationBar from 'react-native-navbar';
+import NavigationBar from 'react-native-navbar/android';
 
 class Basic extends Component {
   render() {
