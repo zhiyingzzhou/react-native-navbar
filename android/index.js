@@ -1,5 +1,4 @@
 import React, {
-  StatusBarIOS,
   Component,
   Text,
   View,
@@ -8,7 +7,6 @@ import React, {
 import NavbarButton from './NavbarButton';
 import NavbarContainer from './NavbarContainer';
 import NavbarContent from './NavbarContent';
-import NavbarStatusBar from './NavbarStatusBar';
 import styles from './styles';
 
 const ButtonShape = {
@@ -58,7 +56,6 @@ export default class NavigationBar extends Component {
 
     return (
       <NavbarContainer style={containerStyle}>
-        <NavbarStatusBar {...this.props.statusBar}/>
         <NavbarContent>
           <Text style={navbarTitleStyle}>{this.props.title.title}</Text>
           <NavbarButton {...this.props.leftButton} style={leftButtonStyle} />
