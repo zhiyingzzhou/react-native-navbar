@@ -1,3 +1,5 @@
+import { PixelRatio, } from 'react-native';
+
 export const NAV_BAR_HEIGHT = 39;
 export const STATUS_BAR_HEIGHT = 20;
 export const NAV_HEIGHT = NAV_BAR_HEIGHT + STATUS_BAR_HEIGHT;
@@ -28,5 +30,18 @@ export default {
     right: 0,
     bottom: 7,
     textAlign: 'center',
+  },
+  container: {
+    tintColor: '#fff',
+  },
+  rightButtonStyle: {
+    marginRight: 8,
+  },
+  leftButtonStyle: {
+    marginLeft: 8,
+  },
+  delimiter: {
+    borderBottomColor: 'rgba(0, 0, 0, .5)',
+    borderBottomWidth: 1 / PixelRatio.get(),
   },
 };

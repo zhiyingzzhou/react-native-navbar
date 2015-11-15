@@ -32,26 +32,32 @@ const StatusBarShape = {
 
 export default class NavigationBar extends Component {
   render() {
-    const customTintColor = this.props.tintColor ?
-      { backgroundColor: this.props.tintColor, } : null;
+    let containerStyle = {
+      backgroundColor: this.props.tintColor,
+      borderBottomColor: this.props.delimiter ?
+        styles.delimiter.borderBottomColor : null,
+      borderBottomWidth: this.props.delimiter ?
+        styles.delimiter.borderBottomWidth : null,
+    };
 
     const navbarTitleStyle = [
       styles.navBarTitleText,
-      { color: this.props.title.tintColor, },
+      this.props.title.tintColor ?
+        { color: this.props.title.tintColor, } : null,
     ];
 
     const leftButtonStyle = [
-      { marginLeft: 8, },
+      styles.leftButtonStyle,
       this.props.leftButton.style,
     ];
 
     const rightButtonStyle = [
-      { marginRight: 8, },
-      this.props.leftButton.style,
+      styles.rightButtonStyle,
+      this.props.rightButton.style,
     ];
 
     return (
-      <NavbarContainer style={customTintColor}>
+      <NavbarContainer style={containerStyle}>
         <NavbarStatusBar {...this.props.statusBar}/>
         <NavbarContent>
           <Text style={navbarTitleStyle}>{this.props.title.title}</Text>
@@ -62,11 +68,17 @@ export default class NavigationBar extends Component {
     );
   }
 
+  static defaultProps = {
+    delimiter: true,
+    tintColor: styles.container.tintColor,
+  }
+
   static propTypes = {
     style: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.array,
     ]),
+    delimiter: PropTypes.bool,
     tintColor: PropTypes.string,
     statusBar: PropTypes.shape(StatusBarShape),
     leftButton: PropTypes.oneOfType([
