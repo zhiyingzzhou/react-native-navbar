@@ -1,6 +1,7 @@
 import React, {
   Component,
   Text,
+  Image,
   View,
   PropTypes,
 } from 'react-native';
@@ -32,13 +33,9 @@ export default class NavigationBar extends Component {
   render() {
     let containerStyle = {
       backgroundColor: this.props.tintColor,
-      borderBottomColor: this.props.delimiter ?
-        styles.delimiter.borderBottomColor : null,
-      borderBottomWidth: this.props.delimiter ?
-        styles.delimiter.borderBottomWidth : null,
     };
 
-    const navbarTitleStyle = [
+    const titleStyle = [
       styles.title,
       this.props.title.tintColor ?
         { color: this.props.title.tintColor, } : null,
@@ -57,9 +54,7 @@ export default class NavigationBar extends Component {
     return (
       <NavbarContainer style={containerStyle}>
         <NavbarContent>
-          <Text style={navbarTitleStyle}>{this.props.title.title}</Text>
-          <NavbarButton {...this.props.leftButton} style={leftButtonStyle} />
-          <NavbarButton {...this.props.rightButton} style={rightButtonStyle} />
+          <Text style={titleStyle}>Hello, bitches!</Text>
         </NavbarContent>
       </NavbarContainer>
     );
