@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "react-native": ">=0.13",
-    "react-native-icons": "^0.6.3",
     "react-native-navbar": "git+https://github.com/react-native-fellowship/react-native-navbar.git#bug/statusbar-manipulations",
     "react-native-vector-icons": "^0.8.5"
   }
